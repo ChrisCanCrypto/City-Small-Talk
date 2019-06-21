@@ -50,27 +50,25 @@ function searchYelp(yelpSettings) {
 }
 
 function handleYelp() {
-	let location = zipField;
-	let term = 'restaurants';
+	var token =
+		'Bearer kGyQVf1mVDbLkBJA3ybB37c2we4jmAPdkQfW-42BBsHskQQtW-zxsZIXpSY66UUVmAG7sG9_moAVW33smeq8OQbbU3JnvNu9bQviMTAZB4DMychkVCt0dW0WxX4JXXYx';
+	var yelpURL = 'https://api.yelp.com/v3/businesses/search?';
+	var corsAnywhereURL = 'https://cors-anywhere.herokuapp.com';
 	var yelpSettings = {
-		'async': true,
-		'crossDomain': true,
-		'url': 'https://api.yelp.com/v3/businesses/search?',
-		'method': 'GET',
-		'headers': {
-			'cache-control': 'no-cache',
-			'Authorization':
-				'Bearer kGyQVf1mVDbLkBJA3ybB37c2we4jmAPdkQfW-42BBsHskQQtW-zxsZIXpSY66UUVmAG7sG9_moAVW33smeq8OQbbU3JnvNu9bQviMTAZB4DMychkVCt0dW0WxX4JXXYx'
+		async: true,
+		crossDomain: true,
+		url: corsAnywhereURL + '/' + yelpURL,
+		method: 'GET',
+		data: {
+			term: 'restaurants',
+			location: zipField
+		},
+		headers: {
+			'Authorization': token
 		}
 	};
-	yelpSettings.url = updateYelpURL(yelpSettings.url);
-	searchYelp(yelpSettings);
-}
 
-function updateYelpURL(url) {
-	url += 'location=' + zipField;
-	// console.log(url);
-	return url;
+	searchYelp(yelpSettings);
 }
 
 function handleCST() {
