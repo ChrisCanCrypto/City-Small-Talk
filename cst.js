@@ -39,7 +39,8 @@ function handleSearch() {
 	$('form').on('submit', function(event) {
 		event.preventDefault();
 		updateCitySearch(searchField);
-		handleYelp();
+		// handleYelp();
+		handleNews();
 	});
 }
 
@@ -49,8 +50,14 @@ function searchYelp(yelpSettings) {
 	});
 }
 
+function searchNews(newsSettings) {
+	$.ajax(newsSettings).done(function(response) {
+		console.log(response);
+	});
+}
+
 function handleYelp() {
-	var token =
+	let token =
 		'Bearer kGyQVf1mVDbLkBJA3ybB37c2we4jmAPdkQfW-42BBsHskQQtW-zxsZIXpSY66UUVmAG7sG9_moAVW33smeq8OQbbU3JnvNu9bQviMTAZB4DMychkVCt0dW0WxX4JXXYx';
 	var yelpURL = 'https://api.yelp.com/v3/businesses/search?';
 	var corsAnywhereURL = 'https://cors-anywhere.herokuapp.com';
@@ -69,6 +76,25 @@ function handleYelp() {
 	};
 
 	searchYelp(yelpSettings);
+}
+
+function handleNews() {
+	let token = 'Bearer ba31778142b040128190f031a0b8a129';
+	var newsURL = 'https://newsapi.org/v2/everything';
+	var newsSettings = {
+		async: true,
+		crossDomain: true,
+		url: newsURL,
+		method: 'GET',
+		data: {
+			q: '"' + cityField + '+' + stateNameField + '"'
+			// apiKey: 'ba31778142b040128190f031a0b8a129'
+		},
+		headers: {
+			'Authorization': token
+		}
+	};
+	searchNews(newsSettings);
 }
 
 function handleCST() {
