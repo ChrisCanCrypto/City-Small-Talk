@@ -13,7 +13,7 @@ function handleZipInput() {
 		zipField = $(this).val();
 
 		if (zipField.length == 5) {
-			$.getJSON('csvjson.json', function(data) {
+			$.getJSON('Resources/csvjson.json', function(data) {
 				$.each(data, function(key, value) {
 					if (zipField == value.zip) {
 						searchField = value;
@@ -51,7 +51,7 @@ function searchYelp(yelpSettings) {
 
 function handleYelp() {
 	let location = zipField;
-	let term = undefined;
+	let term = 'restaurants';
 	var yelpSettings = {
 		'async': true,
 		'crossDomain': true,
