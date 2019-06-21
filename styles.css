@@ -1,5 +1,64 @@
-.api-iframes {
+.api-sections {
 	display: flex;
 	align-items: baseline;
 	justify-content: space-evenly;
+}
+
+#yelp-section,
+#news-section {
+	border: 1px solid black;
+}
+
+.result {
+	display: flex;
+	width: 550px;
+	height: 250px;
+}
+
+.result-info {
+	margin-left: 10px;
+	position: relative;
+}
+
+.result-img {
+	height: 100%;
+	width: 250px;
+}
+
+.result-name {
+	font-size: 28px;
+	margin-block-start: 0.05em;
+	margin-block-end: 0.25em;
+}
+
+.result p,
+.result h5 {
+	margin-block-start: 0.1em;
+	margin-block-end: 0.37em;
+	margin-left: 15px;
+	margin-right: 10px;
+}
+
+.yelp-stats {
+	position: absolute;
+	bottom: 8px;
+}
+
+.yelp-result-stars {
+	height: 25px;
+	margin-left: 10px;
+}
+
+.yelp-result-reviews {
+	font-size: 15px;
+	margin-block-start: 0.1em;
+	margin-block-end: 0.1em;
+}
+
+.yelp-logo {
+	position: absolute;
+	height: 75px;
+	float: right;
+	bottom: 8px;
+	right: 1px;
 }

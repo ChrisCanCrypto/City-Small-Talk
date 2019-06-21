@@ -1,6 +1,6 @@
-const yelpIframe = $('#yelp-iframe');
-const weatherIframe = $('#weather-iframe');
-const newsIframe = $('#news-iframe');
+const yelpSection = $('#yelp-Section');
+const weatherSection = $('#weather-Section');
+const newsSection = $('#news-Section');
 var zipField = undefined;
 var cityField = undefined;
 var stateNameField = undefined;
@@ -13,9 +13,9 @@ function handleSearch() {
 	$('form').on('submit', function(event) {
 		event.preventDefault();
 		updateCitySearch(searchField);
-		// handleYelp();
+		handleYelp();
 		// handleNews();
-		handleWeather();
+		// handleWeather();
 	});
 }
 
