@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://kit.fontawesome.com/c57b107d09.js"></script>
+    <!--Font Awesome-->
+    <title>City Small Talk</title>
+  </head>
+  <body>
+    <h1>
+      Zip Code Information provided by
+      <a href="https://simplemaps.com/data/us-zips"
+        >https://simplemaps.com/data/us-zips</a
+      >
+    </h1>
+    <form>
+      <label
+        >Zip Code:
+        <input
+          type="text"
+          placeholder="98122"
+          id="zip-input"
+          required
+          size="5"
+          maxlength="5"
+        />
+      </label>
+      <label>
+        City:
+        <input type="text" placeholder="Seattle" id="city-input" />
+      </label>
+      <label>
+        State:
+        <input type="text" placeholder="Washington" id="state-input" />
+      </label>
+      <button><i class="fas fa-search"></i></button>
+    </form>
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"
+  ></script>
+  <script src="cst.js"></script>
+</html>
