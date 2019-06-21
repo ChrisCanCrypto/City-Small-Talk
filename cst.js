@@ -69,6 +69,7 @@ function handleYelp() {
 
 function updateYelpURL(url) {
 	url += 'location=' + zipField;
+	// console.log(url);
 	return url;
 }
 
