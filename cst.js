@@ -59,7 +59,8 @@ function handleYelp() {
 		'method': 'GET',
 		'headers': {
 			'cache-control': 'no-cache',
-			'Postman-Token': 'd0dc1a9c-4db5-4cd5-99cb-d24d8df861f4'
+			'Authorization':
+				'Bearer kGyQVf1mVDbLkBJA3ybB37c2we4jmAPdkQfW-42BBsHskQQtW-zxsZIXpSY66UUVmAG7sG9_moAVW33smeq8OQbbU3JnvNu9bQviMTAZB4DMychkVCt0dW0WxX4JXXYx'
 		}
 	};
 	yelpSettings.url = updateYelpURL(yelpSettings.url);
