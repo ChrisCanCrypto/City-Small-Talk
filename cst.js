@@ -6,6 +6,29 @@ var cityField = undefined;
 var stateNameField = undefined;
 var stateCodeField = undefined;
 var searchField = undefined;
+var weatherObj = {
+	cityName: cityField,
+	stateName: stateCodeField,
+	currentTemp: undefined,
+	highTemp: undefined,
+	lowTemp: undefined,
+	desc: undefined,
+	sunrise: undefined,
+	sunset: undefined
+};
+allNews = [];
+var newsStory = {
+	img: undefined,
+	title: undefined,
+	source: undefined,
+	date: undefined,
+	text: undefined,
+	url: undefined
+};
+
+var weatherResponse = undefined;
+var yelpResponse = undefined;
+var newsResponse = undefined;
 
 function handleSearch() {
 	handleZipInput();
@@ -14,8 +37,8 @@ function handleSearch() {
 		event.preventDefault();
 		updateCitySearch(searchField);
 		handleYelp();
-		// handleNews();
-		// handleWeather();
+		handleNews();
+		handleWeather();
 	});
 }
 
@@ -69,7 +92,8 @@ function handleYelp() {
 
 function searchYelp(yelpSettings) {
 	$.ajax(yelpSettings).done(function(response) {
-		console.log(response);
+		yelpResponse = response;
+		console.log(yelpResponse);
 	});
 }
 
@@ -94,8 +118,16 @@ function handleNews() {
 
 function searchNews(newsSettings) {
 	$.ajax(newsSettings).done(function(response) {
-		console.log(response);
+		newsResponse = response;
+		console.log(newsResponse);
+		// setNewsStories(response);
 	});
+}
+
+function setNewsStories(response) {}
+
+function setAllNews(story) {
+	allNews.push(story);
 }
 
 function handleWeather() {
@@ -117,8 +149,15 @@ function handleWeather() {
 
 function searchWeather(weatherSettings) {
 	$.ajax(weatherSettings).done(function(response) {
-		console.log(response);
+		weatherResponse = response;
+		console.log(weatherResponse);
 	});
+}
+
+function kelvinToFahrenheit(temp) {
+	fahTemp = Math.floor((parseFloat(temp) - 273.15) * 1.8 + 32);
+	console.log(fahTemp);
+	return fahTemp;
 }
 
 function handleCST() {

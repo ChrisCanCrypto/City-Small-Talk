@@ -1,30 +1,30 @@
-businesses: Array(20)
-0:
-alias: "reckless-noodle-house-seattle-2"
-categories: Array(3)
-0: {alias: "bars", title: "Bars"}
-1: {alias: "noodles", title: "Noodles"}
-2: {alias: "asianfusion", title: "Asian Fusion"}
-length: 3
-__proto__: Array(0)
-coordinates: {latitude: 47.5991, longitude: -122.29906}
-display_phone: "(206) 329-5499"
-distance: 1576.6469452168167
-id: "XE0C4z-DByNlXZ2IUtouhA"
-image_url: "https://s3-media1.fl.yelpcdn.com/bphoto/SQxhz71_QuJSJi2uyOUzsg/o.jpg"
-is_closed: false
-location:
-address1: "2519 S Jackson St"
-address2: ""
-address3: null
-city: "Seattle"
-country: "US"
-display_address: (2) ["2519 S Jackson St", "Seattle, WA 98144"]
-state: "WA"
-zip_code: "98144"
-__proto__: Object
-name: "Reckless Noodle House"
-phone: "+12063295499"
-price: "$$"
-rating: 4.5
-review_count: 156
+yelpResponse.businesses[businessNum].categories.length = int length of catagories
+yelpResponse.businesses[businessNum].categories[catNum].title = category name
+yelpResponse.businesses[businessNum].display_phone = phone number
+yelpResponse.businesses[businessNum].image_url = business image
+yelpResponse.businesses[businessNum].location.display_address[0] = street name
+yelpResponse.businesses[businessNum].location.display_address[1] = city state zip
+yelpResponse.businesses[businessNum].name = business name
+yelpResponse.businesses[businessNum].price = price $'s
+yelpResponse.businesses[businessNum].rating = int stars out of 5
+yelpResponse.businesses[businessNum].review_count = number of reviews
+yelpResponse.businesses[businessNum].url = link to the businesses page
+
+
+weatherResponse.dt = city id
+weatherResponse.main.temp = current temp
+weatherResponse.main.temp_max = high temp ***ALL TEMP IN KELVIN***
+weatherResponse.main.temp_min = low temp
+weatherResponse.sys.sunrise = sunrise time
+weatherResponse.sys.sunset = sunset time
+weatherResponse.weather[0].description = few word discription of the weather
+
+
+
+newsResponse.articles[articleNum].author = author of the articleNum
+newsResponse.articles[articleNum].discription = article discription
+newsResponse.articles[articleNum].publishedAt = date on YYYY-MM-DDT18:02:26Z
+newsResponse.articles[articleNum].source.name = publication name
+newsResponse.articles[articleNum].title = article title
+newsResponse.articles[articleNum].url = article link
+newsResponse.articles[articleNum].urlToImage = image link
