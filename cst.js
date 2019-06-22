@@ -1,6 +1,6 @@
-const yelpSection = $('#yelp-Section');
-const weatherSection = $('#weather-Section');
-const newsSection = $('#news-Section');
+const yelpSection = $('#yelp-section');
+const weatherSection = $('#weather-section');
+const newsSection = $('#news-section');
 var zipField = undefined;
 var cityField = undefined;
 var stateNameField = undefined;
@@ -26,6 +26,23 @@ var newsStory = {
 	url: undefined
 };
 
+var yelpStar = {
+	'0': 'Resources/yelp_stars/web_and_ios/regular/regular_0.png',
+	'1': 'Resources/yelp_stars/web_and_ios/regular/regular_1.png',
+	'1.5': 'Resources/yelp_stars/web_and_ios/regular/regular_1_half.png',
+	'2': 'Resources/yelp_stars/web_and_ios/regular/regular_2.png',
+	'2.5': 'Resources/yelp_stars/web_and_ios/regular/regular_2_half.png',
+	'3': 'Resources/yelp_stars/web_and_ios/regular/regular_3.png',
+	'3.5': 'Resources/yelp_stars/web_and_ios/regular/regular_3_half.png',
+	'4': 'Resources/yelp_stars/web_and_ios/regular/regular_4.png',
+	'4.5': 'Resources/yelp_stars/web_and_ios/regular/regular_4_half.png',
+	'5': 'Resources/yelp_stars/web_and_ios/regular/regular_5.png'
+};
+
+function setStarsImg(rating) {
+	return '<img class="yelp-result-stars" alt="' + rating + ' stars" src="' + yelpStar[rating] + '">';
+}
+
 var weatherResponse = undefined;
 var yelpResponse = undefined;
 var newsResponse = undefined;
@@ -37,8 +54,8 @@ function handleSearch() {
 		event.preventDefault();
 		updateCitySearch(searchField);
 		handleYelp();
-		handleNews();
-		handleWeather();
+		// handleNews();
+		// handleWeather();
 	});
 }
 
@@ -88,13 +105,92 @@ function handleYelp() {
 	};
 
 	searchYelp(yelpSettings);
+	// displayYelpList(yelpResponse);
 }
 
 function searchYelp(yelpSettings) {
 	$.ajax(yelpSettings).done(function(response) {
 		yelpResponse = response;
 		console.log(yelpResponse);
+		displayYelpList(yelpResponse);
 	});
+}
+
+function addYelpEntries(res, amount) {
+	var newEntries = '';
+
+	for (let i = 0; i < amount; i++) {
+		newEntries += '<li class="result">';
+		newEntries += addResultImg(res[i]);
+		newEntries += addResultInfo(res[i]);
+		newEntries += addResultStats(res[i]);
+		newEntries += addYelpLogo(res[i]);
+		newEntries += '</li>';
+	}
+
+	return newEntries;
+}
+
+function addResultImg(res) {
+	var imgStr = '<img src="';
+	imgStr += res.image_url;
+	imgStr += '" alt="';
+	imgStr += res.name;
+	imgStr += ' image" class="result-img">';
+	return imgStr;
+}
+
+function addResultInfo(res) {
+	var infoStr = '';
+	infoStr += '<div class="result-info">';
+	infoStr += '<h2 class="result-name">';
+	infoStr += res.name;
+	infoStr += '</h2>';
+	infoStr += '<h5 class="result-categories">';
+	for (let j = 0; j < res.categories.length; j++) {
+		infoStr += res.categories[j].title;
+		infoStr += ' | ';
+	}
+	infoStr += '</h5>';
+	infoStr += '<p class="yelp-result-location">';
+	infoStr += res.location.display_address[0];
+	infoStr += '<br>';
+	infoStr += res.location.display_address[1];
+	infoStr += '</p>';
+	infoStr += '<p class="yelp-result-number">';
+	infoStr += res.display_phone;
+	infoStr += '</p>';
+	infoStr += '</div>';
+	return infoStr;
+}
+
+function addResultStats(res) {
+	var statStr = '';
+	statStr += '<div class="yelp-stats">';
+	statStr += setStarsImg(res.rating);
+	statStr += '<p class="yelp-result-reviews">Based on ';
+	statStr += res.review_count;
+	statStr += ' Reviews</p>';
+	statStr += '</div>';
+	return statStr;
+}
+
+function addYelpLogo(res) {
+	var logoStr = '';
+	logoStr += '<a href="';
+	logoStr += res.url;
+	logoStr += '" target="_blank">';
+	logoStr += '<img src="Resources/YelpLogo_Trademark/Screen(R)/Yelp_trademark_RGB.png" alt="yelp logo" class="yelp-logo" />';
+	logoStr += '</a>';
+	return logoStr;
+}
+
+function displayYelpList(res) {
+	var yelpEntry = '<ul>';
+	yelpEntry += addYelpEntries(res.businesses, 3);
+	yelpEntry += '</ul>';
+
+	yelpSection.append(yelpEntry);
 }
 
 function handleNews() {
@@ -162,6 +258,7 @@ function kelvinToFahrenheit(temp) {
 
 function handleCST() {
 	handleSearch();
+	setStarsImg(1);
 }
 
 $(handleCST);
