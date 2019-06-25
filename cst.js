@@ -8,11 +8,10 @@ var stateCodeField = undefined;
 var searchField = undefined;
 var weatherObj = {
 	cityName: cityField,
-	stateName: stateCodeField,
 	currentTemp: undefined,
 	highTemp: undefined,
 	lowTemp: undefined,
-	desc: undefined,
+	disc: undefined,
 	sunrise: undefined,
 	sunset: undefined
 };
@@ -30,10 +29,6 @@ var yelpStar = {
 	'5': 'Resources/yelp_stars/web_and_ios/regular/regular_5.png'
 };
 
-function setStarsImg(rating) {
-	return '<img class="yelp-result-stars" alt="' + rating + ' stars" src="' + yelpStar[rating] + '">';
-}
-
 var weatherResponse = undefined;
 var yelpResponse = undefined;
 var newsResponse = undefined;
@@ -46,7 +41,7 @@ function handleSearch() {
 		updateCitySearch(searchField);
 		handleYelp();
 		handleNews();
-		// handleWeather();
+		handleWeather();
 	});
 }
 
@@ -99,6 +94,10 @@ function handleYelp() {
 	// displayYelpList(yelpResponse);
 }
 
+function setStarsImg(rating) {
+	return '<img class="yelp-result-stars" alt="' + rating + ' stars" src="' + yelpStar[rating] + '">';
+}
+
 function searchYelp(yelpSettings) {
 	$.ajax(yelpSettings).done(function(response) {
 		yelpResponse = response;
@@ -112,7 +111,7 @@ function addYelpEntries(res, amount) {
 
 	for (let i = 0; i < amount; i++) {
 		newEntries += '<li class="result">';
-		newEntries += addResultImg(res[i]);
+		newEntries += addYelpImg(res[i]);
 		newEntries += addResultInfo(res[i]);
 		newEntries += addResultStats(res[i]);
 		newEntries += '</li>';
@@ -121,7 +120,7 @@ function addYelpEntries(res, amount) {
 	return newEntries;
 }
 
-function addResultImg(res) {
+function addYelpImg(res) {
 	var imgStr = '<img src="';
 	imgStr += res.image_url;
 	imgStr += '" alt="';
@@ -180,6 +179,7 @@ function addResultStats(res) {
 }
 
 function displayYelpList(res) {
+	yelpSection.empty();
 	var yelpEntry = '<ul>';
 	yelpEntry += addYelpEntries(res.businesses, 3);
 	yelpEntry += '</ul>';
@@ -215,6 +215,7 @@ function searchNews(newsSettings) {
 }
 
 function displayNewsList(res) {
+	newsSection.empty();
 	var newsEntry = '<ul>';
 	newsEntry += addNewsEntries(res.articles, 3);
 	newsEntry += '</ul>';
@@ -270,7 +271,39 @@ function searchWeather(weatherSettings) {
 	$.ajax(weatherSettings).done(function(response) {
 		weatherResponse = response;
 		console.log(weatherResponse);
+		setWeatherObj(weatherResponse);
+		displayWeather();
 	});
+}
+
+function setWeatherObj(res) {
+	weatherObj.currentTemp = kelvinToFahrenheit(res.main.temp);
+	weatherObj.highTemp = kelvinToFahrenheit(res.main.temp_max);
+	weatherObj.lowTemp = kelvinToFahrenheit(res.main.temp_min);
+	weatherObj.disc = res.weather[0].description;
+	weatherObj.sunrise = res.sys.sunrise;
+	weatherObj.sunset = res.sys.sunset;
+	weatherObj.cityName = cityField;
+}
+
+function displayWeather() {
+	weatherSection.empty();
+	weatherStr = '';
+	weatherStr += '<h2>';
+	weatherStr += weatherObj.cityName;
+	weatherStr += '</h2>';
+	weatherStr += '<h2>';
+	weatherStr += weatherObj.currentTemp;
+	weatherStr += '&#8457</h2>';
+	weatherStr += '<div class="temp-range">';
+	weatherStr += '<h4 class="high">High: ' + weatherObj.highTemp + '&#8457</h4>';
+	weatherStr += '<h4 class="low">Low: ' + weatherObj.lowTemp + '&#8457</h4>';
+	weatherStr += '</div>';
+	weatherStr += '<h2 class="desc">';
+	weatherStr += weatherObj.disc;
+	weatherStr += '</h2>';
+
+	weatherSection.append(weatherStr);
 }
 
 function kelvinToFahrenheit(temp) {
