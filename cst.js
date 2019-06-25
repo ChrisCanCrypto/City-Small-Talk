@@ -180,7 +180,7 @@ function addResultStats(res) {
 
 function displayYelpList(res) {
 	yelpSection.empty();
-	var yelpEntry = '<ul>';
+	var yelpEntry = '<h2>Yelp Results</h2><hl><ul>';
 	yelpEntry += addYelpEntries(res.businesses, 3);
 	yelpEntry += '</ul>';
 
@@ -216,7 +216,7 @@ function searchNews(newsSettings) {
 
 function displayNewsList(res) {
 	newsSection.empty();
-	var newsEntry = '<ul>';
+	var newsEntry = '<h2>News Results</h2><hl><ul>';
 	newsEntry += addNewsEntries(res.articles, 3);
 	newsEntry += '</ul>';
 

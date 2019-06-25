@@ -6,26 +6,33 @@
 	align-items: center;
 }
 
-ul {
-	padding-inline-start: 0;
+#search-field {
+	text-align: center;
 }
 
-.api-sections {
+section {
+	margin-top: 10px;
+}
+
+ul {
+	padding-inline-start: 0;
 	display: flex;
-	align-items: baseline;
-	justify-content: space-evenly;
+	flex-direction: column;
+}
+
+li {
+	align-self: center;
 }
 
 #yelp-section,
 #news-section {
 	border: 1px solid black;
 }
-
 .result {
 	display: flex;
-	width: 550px;
-	height: 250px;
-	margin: 10px;
+	width: 97%;
+	height: 100px;
+	margin: 5px;
 	border: 1px solid black;
 }
 
@@ -35,12 +42,12 @@ ul {
 }
 
 .result-img {
-	height: 250px;
-	width: 250px;
+	height: 100px;
+	width: 100px;
 }
 
 .result-name {
-	font-size: 28px;
+	font-size: 13px;
 	margin-block-start: 0.05em;
 	margin-block-end: 0.25em;
 }
@@ -53,26 +60,83 @@ ul {
 	margin-right: 10px;
 }
 
+.yelp-result-location,
+.result-categories,
+.result-source {
+	display: none;
+}
+
 .yelp-stats {
 	position: absolute;
 	bottom: 8px;
 }
 
 .yelp-result-stars {
-	height: 25px;
+	height: 15px;
 	margin-left: 10px;
 }
 
 .yelp-result-reviews {
-	font-size: 15px;
+	font-size: 10px;
 	margin-block-start: 0.1em;
 	margin-block-end: 0.1em;
 }
 
 .yelp-logo {
 	position: absolute;
-	height: 75px;
+	height: 45px;
 	float: right;
 	bottom: 8px;
-	left: 175px;
+	left: 110px;
+}
+
+@media screen and (min-width: 425px) {
+	.result {
+		height: 125px;
+	}
+	.result-categories {
+		display: inline;
+	}
+	.yelp-logo {
+		left: 130px;
+	}
+	.result-img {
+		height: 125px;
+		width: 125px;
+	}
+}
+
+@media screen and (min-width: 550px) {
+	.result {
+		height: 250px;
+		max-width: 550px;
+	}
+	.result-img {
+		height: 250px;
+		width: 250px;
+	}
+	.yelp-result-location {
+		display: inline-block;
+	}
+	.yelp-logo {
+		height: 75px;
+	}
+	.yelp-result-stars {
+		height: 22px;
+	}
+	.result h2 {
+		font-size: 22px;
+	}
+	.result-source {
+		display: inline;
+	}
+}
+
+@media screen and (min-width: 1050px) {
+	.api-sections {
+		margin-top: 10px;
+		display: flex;
+		align-items: baseline;
+		justify-content: space-evenly;
+	}
 }
