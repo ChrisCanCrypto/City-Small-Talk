@@ -6,6 +6,10 @@
 	align-items: center;
 }
 
+ul {
+	padding-inline-start: 0;
+}
+
 .api-sections {
 	display: flex;
 	align-items: baseline;
@@ -21,6 +25,8 @@
 	display: flex;
 	width: 550px;
 	height: 250px;
+	margin: 10px;
+	border: 1px solid black;
 }
 
 .result-info {
@@ -68,5 +74,5 @@
 	height: 75px;
 	float: right;
 	bottom: 8px;
-	right: 1px;
+	left: 175px;
 }

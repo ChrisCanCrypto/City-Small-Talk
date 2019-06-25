@@ -124,7 +124,6 @@ function addYelpEntries(res, amount) {
 		newEntries += addResultImg(res[i]);
 		newEntries += addResultInfo(res[i]);
 		newEntries += addResultStats(res[i]);
-		newEntries += addYelpLogo(res[i]);
 		newEntries += '</li>';
 	}
 
@@ -160,7 +159,6 @@ function addResultInfo(res) {
 	infoStr += '<p class="yelp-result-number">';
 	infoStr += res.display_phone;
 	infoStr += '</p>';
-	infoStr += '</div>';
 	return infoStr;
 }
 
@@ -171,18 +169,14 @@ function addResultStats(res) {
 	statStr += '<p class="yelp-result-reviews">Based on ';
 	statStr += res.review_count;
 	statStr += ' Reviews</p>';
+	statStr += '<a href="';
+	statStr += res.url;
+	statStr += '" target="_blank">';
+	statStr += '<img src="Resources/YelpLogo_Trademark/Screen(R)/Yelp_trademark_RGB.png" alt="yelp logo" class="yelp-logo" />';
+	statStr += '</a>';
+	statStr += '</div>';
 	statStr += '</div>';
 	return statStr;
-}
-
-function addYelpLogo(res) {
-	var logoStr = '';
-	logoStr += '<a href="';
-	logoStr += res.url;
-	logoStr += '" target="_blank">';
-	logoStr += '<img src="Resources/YelpLogo_Trademark/Screen(R)/Yelp_trademark_RGB.png" alt="yelp logo" class="yelp-logo" />';
-	logoStr += '</a>';
-	return logoStr;
 }
 
 function displayYelpList(res) {
