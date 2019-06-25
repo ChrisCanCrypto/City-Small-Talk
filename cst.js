@@ -16,15 +16,6 @@ var weatherObj = {
 	sunrise: undefined,
 	sunset: undefined
 };
-allNews = [];
-var newsStory = {
-	img: undefined,
-	title: undefined,
-	source: undefined,
-	date: undefined,
-	text: undefined,
-	url: undefined
-};
 
 var yelpStar = {
 	'0': 'Resources/yelp_stars/web_and_ios/regular/regular_0.png',
@@ -54,7 +45,7 @@ function handleSearch() {
 		event.preventDefault();
 		updateCitySearch(searchField);
 		handleYelp();
-		// handleNews();
+		handleNews();
 		// handleWeather();
 	});
 }
@@ -139,6 +130,15 @@ function addResultImg(res) {
 	return imgStr;
 }
 
+function addNewsImg(res) {
+	var imgStr = '<img src="';
+	imgStr += res.urlToImage;
+	imgStr += '" alt="';
+	imgStr += res.title;
+	imgStr += ' image" class="result-img">';
+	return imgStr;
+}
+
 function addResultInfo(res) {
 	var infoStr = '';
 	infoStr += '<div class="result-info">';
@@ -210,14 +210,43 @@ function searchNews(newsSettings) {
 	$.ajax(newsSettings).done(function(response) {
 		newsResponse = response;
 		console.log(newsResponse);
-		// setNewsStories(response);
+		displayNewsList(newsResponse);
 	});
 }
 
-function setNewsStories(response) {}
+function displayNewsList(res) {
+	var newsEntry = '<ul>';
+	newsEntry += addNewsEntries(res.articles, 3);
+	newsEntry += '</ul>';
 
-function setAllNews(story) {
-	allNews.push(story);
+	newsSection.append(newsEntry);
+}
+
+function addNewsEntries(res, amount) {
+	var newEntries = '';
+
+	for (let i = 0; i < amount; i++) {
+		newEntries += '<li class="result">';
+		newEntries += addNewsImg(res[i]);
+		newEntries += addNewsInfo(res[i]);
+		newEntries += '</li>';
+	}
+
+	return newEntries;
+}
+
+function addNewsInfo(res) {
+	var infoStr = '';
+	infoStr += '<div class="result-info">';
+	infoStr += '<h2 class="result-name">';
+	infoStr += res.title;
+	infoStr += '</h2>';
+	infoStr += '<h5 class="result-source">';
+	infoStr += res.source.name + ' | ' + res.publishedAt;
+	infoStr += '</h5><p><a href="';
+	infoStr += res.url;
+	infoStr += '">Read More</a></p></div>';
+	return infoStr;
 }
 
 function handleWeather() {
