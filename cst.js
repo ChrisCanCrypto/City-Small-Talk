@@ -194,7 +194,7 @@ function handleNews() {
 		url: newsURL,
 		method: 'GET',
 		data: {
-			q: '"' + cityField + '+' + stateNameField + '"'
+			q: '"' + stateNameField + '"'
 			// apiKey: 'ba31778142b040128190f031a0b8a129'
 		},
 		headers: {
