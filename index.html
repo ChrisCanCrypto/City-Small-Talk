@@ -6,47 +6,51 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<!-- CSS normalizer -->
 		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.css" />
-		<!--Font Awesome-->
-		<script src="https://kit.fontawesome.com/c57b107d09.js"></script>
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 		<title>City Small Talk</title>
 	</head>
 	<body>
-		<!-- Search settings -->
-		<section id="search-field">
-			<div class="search-box">
-				<form>
-					<div class="inner-form">
-						<fieldset>
-							<legend>Get local weather, news, and restraunt recomendations in your city!</legend>
-						</fieldset>
-						<div class="search-input">
-							<div class="input-field first-wrap">
-								<input type="text" placeholder="Zip Code" id="zip-input" required size="5" maxlength="5" />
-							</div>
-							<div class="input-field second-wrap">
-								<button type="submit" role="search" id="search-btn"><i class="fas fa-search"></i></button>
+		<header>
+			<!-- Search settings -->
+			<section id="search-field">
+				<div class="search-box row">
+					<form>
+						<div class="inner-form banner">
+							<fieldset>
+								<legend>Get local weather, news, and restraunt recomendations in your city!</legend>
+							</fieldset>
+							<div class="search-input">
+								<div class="input-field first-wrap">
+									<input type="text" placeholder="Zip Code" id="zip-input" required size="5" maxlength="5" />
+								</div>
+								<div class="input-field second-wrap">
+									<button type="submit" role="search" id="search-btn">SEARCH SMALL TALK</button>
+								</div>
 							</div>
 						</div>
-					</div>
-				</form>
-			</div>
-		</section>
-
-		<!-- Weather Section -->
-		<section id="weather-section"></section>
-
-		<div class="api-sections">
-			<!-- Yelp section -->
-			<section id="yelp-section"></section>
-
-			<!-- News Section -->
-			<section id="news-section"></section>
-
-			<section id="test-section">
-				<img src="" alt="" class="yelp-result-stars" />
+					</form>
+				</div>
 			</section>
-		</div>
+		</header>
+		<main>
+			<!-- Weather Section -->
+			<div class="banner">
+				<section id="weather-section"></section>
+			</div>
+
+			<div class="api-sections row">
+				<!-- Yelp section -->
+				<section id="yelp-section"></section>
+
+				<!-- News Section -->
+				<section id="news-section"></section>
+
+				<section id="test-section">
+					<img src="" alt="" class="yelp-result-stars" />
+				</section>
+			</div>
+		</main>
+
 		<footer>
 			<p>
 				Zip Code Information provided by

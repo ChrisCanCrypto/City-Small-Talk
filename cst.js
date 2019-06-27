@@ -299,7 +299,7 @@ function displayWeather() {
 	weatherStr += '</div>';
 	weatherStr += '<h2 class="desc">';
 	weatherStr += weatherObj.disc;
-	weatherStr += '</h2>';
+	weatherStr += '</h2><hr>';
 
 	weatherSection.append(weatherStr);
 }
