@@ -1,13 +1,7 @@
-#weather-section {
-	display: flex;
-	background-color: beige;
-	width: 100%;
-	justify-content: space-evenly;
-	align-items: center;
-}
-
-#search-field {
-	text-align: center;
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 section {
@@ -24,10 +18,111 @@ li {
 	align-self: center;
 }
 
+#search-field {
+	position: relative;
+	width: 100%;
+	height: 80vh;
+	background: url(img/CST_Search.jpg);
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+.search-box {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-55%, -55%);
+}
+
+form {
+	display: block;
+	width: 100%;
+}
+
+fieldset {
+	margin: 0;
+	padding: 0;
+	-webkit-margin-start: 0;
+	-webkit-margin-end: 0;
+	-webkit-padding-before: 0;
+	-webkit-padding-start: 0;
+	-webkit-padding-end: 0;
+	-webkit-padding-after: 0;
+	border: 0;
+}
+
+form legend {
+	font-size: 72px;
+	line-height: 1;
+	color: #fff;
+	padding-bottom: 15px;
+}
+
+legend {
+	margin: 0;
+	padding: 0;
+	display: block;
+	-webkit-padding-start: 0;
+	-webkit-padding-end: 0;
+}
+
+form .inner-form {
+	background: rgba(0, 0, 0, 0.5);
+	padding: 10px;
+	display: flex;
+	width: 110%;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+.search-input {
+	display: flex;
+}
+
+#search-btn {
+	width: 100%;
+	height: 100%;
+	font-size: 20px;
+}
+
+form .inner-form .input-field .first-wrap {
+	-ms-flex-positive: 1;
+	flex-grow: 1;
+	margin-right: 30px;
+	height: 68px;
+}
+
+form .inner-form .input-field input {
+	height: 100%;
+	background: #fff;
+	border-radius: 0.5px;
+	border: 0;
+	display: block;
+	width: 100%;
+	padding: 10px 32px;
+	font-size: 20px;
+}
+
+button,
+input {
+	overflow: visible;
+}
+
+#weather-section {
+	display: flex;
+	background-color: beige;
+	width: 100%;
+	justify-content: space-evenly;
+	align-items: center;
+	margin-top: 0;
+}
+
 #yelp-section,
 #news-section {
 	border: 1px solid black;
 }
+
 .result {
 	display: flex;
 	width: 97%;

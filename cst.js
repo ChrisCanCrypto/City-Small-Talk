@@ -55,8 +55,6 @@ function handleZipInput() {
 				$.each(data, function(key, value) {
 					if (zipField == value.zip) {
 						searchField = value;
-						$('#city-input').val(searchField.city);
-						$('#state-input').val(searchField.state_name);
 					}
 				});
 			});

@@ -14,22 +14,23 @@
 	<body>
 		<!-- Search settings -->
 		<section id="search-field">
-			<form>
-				<label>
-					Zip Code:
-					<input type="text" placeholder="Zip" id="zip-input" required size="5" maxlength="5" />
-				</label>
-				<label>
-					City:
-					<input type="text" placeholder="City" id="city-input" />
-				</label>
-				<label>
-					State:
-					<input type="text" placeholder="State" id="state-input" />
-				</label>
-				<button type="submit" role="search" id="search"><i class="fas fa-search"></i></button>
-			</form>
-			<p>Enter a zip code of a city to see the weather, Yelp listings, and recent news.</p>
+			<div class="search-box">
+				<form>
+					<div class="inner-form">
+						<fieldset>
+							<legend>Get local weather, news, and restraunt recomendations in your city!</legend>
+						</fieldset>
+						<div class="search-input">
+							<div class="input-field first-wrap">
+								<input type="text" placeholder="Zip Code" id="zip-input" required size="5" maxlength="5" />
+							</div>
+							<div class="input-field second-wrap">
+								<button type="submit" role="search" id="search-btn"><i class="fas fa-search"></i></button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
 		</section>
 
 		<!-- Weather Section -->
