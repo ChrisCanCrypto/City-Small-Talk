@@ -6,6 +6,7 @@ var cityField = undefined;
 var stateNameField = undefined;
 var stateCodeField = undefined;
 var searchField = undefined;
+var yelpTerm = undefined;
 var weatherObj = {
 	cityName: cityField,
 	currentTemp: undefined,
@@ -108,7 +109,7 @@ function addYelpEntries(res, amount) {
 	var newEntries = '';
 
 	for (let i = 0; i < amount; i++) {
-		newEntries += '<li class="result">';
+		newEntries += '<li class="yelp-card">';
 		newEntries += addYelpImg(res[i]);
 		newEntries += addResultInfo(res[i]);
 		newEntries += addResultStats(res[i]);
@@ -119,11 +120,11 @@ function addYelpEntries(res, amount) {
 }
 
 function addYelpImg(res) {
-	var imgStr = '<img src="';
+	var imgStr = '<div class="y-img"> <img src="';
 	imgStr += res.image_url;
 	imgStr += '" alt="';
 	imgStr += res.name;
-	imgStr += ' image" class="result-img">';
+	imgStr += ' image" > </div>';
 	return imgStr;
 }
 
@@ -138,22 +139,23 @@ function addNewsImg(res) {
 
 function addResultInfo(res) {
 	var infoStr = '';
-	infoStr += '<div class="result-info">';
-	infoStr += '<h2 class="result-name">';
+	infoStr += '<h2 class="y-name"><a href="';
+	infoStr += res.url;
+	infoStr += '" target="_blank">';
 	infoStr += res.name;
-	infoStr += '</h2>';
-	infoStr += '<h5 class="result-categories">';
+	infoStr += '</a></h2>';
+	infoStr += '<h5 class="y-cat">';
 	for (let j = 0; j < res.categories.length; j++) {
 		infoStr += res.categories[j].title;
 		infoStr += ' | ';
 	}
 	infoStr += '</h5>';
-	infoStr += '<p class="yelp-result-location">';
-	infoStr += res.location.display_address[0];
-	infoStr += '<br>';
-	infoStr += res.location.display_address[1];
-	infoStr += '</p>';
-	infoStr += '<p class="yelp-result-number">';
+	infoStr += '<div class="y-loc">';
+	for (let k = 0; k < res.location.display_address.length; k++) {
+		infoStr += '<p>' + res.location.display_address[k] + '</p>';
+	}
+	infoStr += '</div>';
+	infoStr += '<p class="y-num">';
 	infoStr += res.display_phone;
 	infoStr += '</p>';
 	return infoStr;
@@ -161,18 +163,18 @@ function addResultInfo(res) {
 
 function addResultStats(res) {
 	var statStr = '';
-	statStr += '<div class="yelp-stats">';
+	statStr += '<div class="y-stars">';
 	statStr += setStarsImg(res.rating);
-	statStr += '<p class="yelp-result-reviews">Based on ';
+	statStr += '</div>';
+	statStr += '<p class="y-rev">Based on ';
 	statStr += res.review_count;
 	statStr += ' Reviews</p>';
-	statStr += '<a href="';
+	statStr += '</div>';
+	statStr += '<a class="y-logo" href="';
 	statStr += res.url;
 	statStr += '" target="_blank">';
-	statStr += '<img src="Resources/YelpLogo_Trademark/Screen(R)/Yelp_trademark_RGB.png" alt="yelp logo" class="yelp-logo" />';
+	statStr += '<img src="Resources/YelpLogo_Trademark/Screen(R)/Yelp_trademark_RGB.png" alt="yelp logo"  />';
 	statStr += '</a>';
-	statStr += '</div>';
-	statStr += '</div>';
 	return statStr;
 }
 
@@ -194,7 +196,7 @@ function handleNews() {
 		url: newsURL,
 		method: 'GET',
 		data: {
-			q: '"' + cityField + '+' + stateNameField + '"'
+			q: '"' + stateNameField + '"'
 			// apiKey: 'ba31778142b040128190f031a0b8a129'
 		},
 		headers: {
@@ -214,7 +216,7 @@ function searchNews(newsSettings) {
 
 function displayNewsList(res) {
 	newsSection.empty();
-	var newsEntry = '<h2>News Results</h2><hl><ul>';
+	var newsEntry = '<h2>News Results</h2><ul>';
 	newsEntry += addNewsEntries(res.articles, 3);
 	newsEntry += '</ul>';
 
@@ -299,7 +301,7 @@ function displayWeather() {
 	weatherStr += '</div>';
 	weatherStr += '<h2 class="desc">';
 	weatherStr += weatherObj.disc;
-	weatherStr += '</h2><hr>';
+	weatherStr += '</h2>';
 
 	weatherSection.append(weatherStr);
 }
@@ -312,7 +314,6 @@ function kelvinToFahrenheit(temp) {
 
 function handleCST() {
 	handleSearch();
-	setStarsImg(1);
 }
 
 $(handleCST);

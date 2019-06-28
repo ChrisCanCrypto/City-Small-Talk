@@ -4,19 +4,9 @@
 	padding: 0;
 }
 
-.row {
-	max-width: 1400px;
-	margin: 0 auto;
-}
-
-.row::before,
-.row::after {
-	display: table;
-	content: '';
-}
-
-.row::after {
-	clear: both;
+body {
+	background-image: linear-gradient(to right bottom, #f9f8d0, #f1ebb6, #eadd9c, #e5cf82, #e0c169);
+	background-repeat: no-repeat;
 }
 
 section {
@@ -33,13 +23,58 @@ li {
 	align-self: center;
 }
 
-#search-field {
-	position: relative;
+.yelp-card {
+	display: grid;
+	grid-template-columns: repeat(9, 1fr);
+	grid-auto-rows: 30px;
+	grid-gap: 5px;
+	max-width: 550px;
+	margin: 0 auto;
+	grid-template-areas:
+		'y-img y-img y-img y-img y-name y-name y-name y-name y-name'
+		'y-img y-img y-img y-img y-cat y-cat y-cat y-cat y-cat'
+		'y-img y-img y-img y-img y-num y-num y-num y-num y-num'
+		'y-img y-img y-img y-img y-loc y-loc y-loc . .'
+		'y-img y-img y-img y-img y-loc y-loc y-loc . .'
+		'y-img y-img y-img y-img y-stars y-stars y-stars y-logo y-logo'
+		'y-img y-img y-img y-img y-rev y-rev y-rev y-logo y-logo';
+}
+
+.y-img {
+	grid-area: y-img;
+}
+
+.y-img img,
+.y-logo img {
 	width: 100%;
-	height: 80vh;
-	background: url(img/CST_Search.jpg);
-	background-size: cover;
-	background-attachment: fixed;
+	height: 100%;
+}
+
+.y-name {
+	grid-area: y-name;
+}
+
+.y-cat {
+	grid-area: y-cat;
+}
+
+.y-loc {
+	grid-area: y-loc;
+}
+
+.y-num {
+	grid-area: y-num;
+}
+
+.y-stars {
+	grid-area: y-stars;
+}
+.y-rev {
+	grid-area: y-rev;
+}
+
+.y-logo {
+	grid-area: y-logo;
 }
 
 form {
@@ -113,10 +148,6 @@ form .inner-form button {
 
 form .inner-form button:hover {
 	color: orangered;
-}
-
-main {
-	background-image: linear-gradient(to right bottom, #f9f8d0, #f1ebb6, #eadd9c, #e5cf82, #e0c169);
 }
 
 #weather-section {
@@ -203,6 +234,10 @@ main {
 	float: right;
 	bottom: 8px;
 	left: 110px;
+}
+
+footer {
+	text-align: center;
 }
 
 @media screen and (min-width: 425px) {
