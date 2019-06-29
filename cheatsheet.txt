@@ -47,7 +47,7 @@ weatherResponse.weather[0].description = few word discription of the weather
 
 
 newsResponse.articles[articleNum].author = author of the articleNum
-newsResponse.articles[articleNum].discription = article discription
+newsResponse.articles[articleNum].description = article description
 newsResponse.articles[articleNum].publishedAt = date on YYYY-MM-DDT18:02:26Z
 newsResponse.articles[articleNum].source.name = publication name
 newsResponse.articles[articleNum].title = article title

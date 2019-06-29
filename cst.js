@@ -6,7 +6,7 @@ var cityField = undefined;
 var stateNameField = undefined;
 var stateCodeField = undefined;
 var searchField = undefined;
-var yelpTerm = undefined;
+var yelpTerm = 'restaurants';
 var weatherObj = {
 	cityName: cityField,
 	currentTemp: undefined,
@@ -37,12 +37,20 @@ var newsResponse = undefined;
 function handleSearch() {
 	handleZipInput();
 
-	$('form').on('submit', function(event) {
+	$('#search-form').on('submit', function(event) {
 		event.preventDefault();
 		updateCitySearch(searchField);
 		handleYelp();
 		handleNews();
 		handleWeather();
+	});
+
+	$('#yelp-form').on('submit', function(event) {
+		event.preventDefault();
+		if (yelpTerm != undefined && yelpTerm != null) {
+			yelpTerm = $('#yelp-term').val();
+			handleYelp();
+		}
 	});
 }
 
@@ -81,7 +89,7 @@ function handleYelp() {
 		url: corsAnywhereURL + '/' + yelpURL,
 		method: 'GET',
 		data: {
-			term: 'restaurants',
+			term: yelpTerm,
 			location: zipField
 		},
 		headers: {
@@ -93,10 +101,6 @@ function handleYelp() {
 	// displayYelpList(yelpResponse);
 }
 
-function setStarsImg(rating) {
-	return '<img class="yelp-result-stars" alt="' + rating + ' stars" src="' + yelpStar[rating] + '">';
-}
-
 function searchYelp(yelpSettings) {
 	$.ajax(yelpSettings).done(function(response) {
 		yelpResponse = response;
@@ -105,86 +109,79 @@ function searchYelp(yelpSettings) {
 	});
 }
 
-function addYelpEntries(res, amount) {
+function displayYelpList(yelp) {
+	var yelpEntry = '';
+	yelpEntry += addYelpEntries(yelp.businesses, 2);
+	yelpSection.empty();
+	yelpSection.append(yelpEntry);
+}
+
+function addYelpEntries(yelp, amount) {
 	var newEntries = '';
 
 	for (let i = 0; i < amount; i++) {
-		newEntries += '<li class="yelp-card">';
-		newEntries += addYelpImg(res[i]);
-		newEntries += addResultInfo(res[i]);
-		newEntries += addResultStats(res[i]);
-		newEntries += '</li>';
+		newEntries += '<div class="yelp-card">';
+		newEntries += addYelpImg(yelp[i]);
+		newEntries += addYelpInfo(yelp[i]);
+		newEntries += addYelpStats(yelp[i]);
+		newEntries += '</div>';
 	}
 
 	return newEntries;
 }
 
-function addYelpImg(res) {
+function addYelpImg(yelp) {
 	var imgStr = '<div class="y-img"> <img src="';
-	imgStr += res.image_url;
+	imgStr += yelp.image_url;
 	imgStr += '" alt="';
-	imgStr += res.name;
+	imgStr += yelp.name;
 	imgStr += ' image" > </div>';
 	return imgStr;
 }
 
-function addNewsImg(res) {
-	var imgStr = '<img src="';
-	imgStr += res.urlToImage;
-	imgStr += '" alt="';
-	imgStr += res.title;
-	imgStr += ' image" class="result-img">';
-	return imgStr;
-}
-
-function addResultInfo(res) {
+function addYelpInfo(yelp) {
 	var infoStr = '';
 	infoStr += '<h2 class="y-name"><a href="';
-	infoStr += res.url;
+	infoStr += yelp.url;
 	infoStr += '" target="_blank">';
-	infoStr += res.name;
+	infoStr += yelp.name;
 	infoStr += '</a></h2>';
 	infoStr += '<h5 class="y-cat">';
-	for (let j = 0; j < res.categories.length; j++) {
-		infoStr += res.categories[j].title;
+	for (let j = 0; j < yelp.categories.length; j++) {
+		infoStr += yelp.categories[j].title;
 		infoStr += ' | ';
 	}
 	infoStr += '</h5>';
 	infoStr += '<div class="y-loc">';
-	for (let k = 0; k < res.location.display_address.length; k++) {
-		infoStr += '<p>' + res.location.display_address[k] + '</p>';
+	for (let k = 0; k < yelp.location.display_address.length; k++) {
+		infoStr += '<p>' + yelp.location.display_address[k] + '</p>';
 	}
 	infoStr += '</div>';
 	infoStr += '<p class="y-num">';
-	infoStr += res.display_phone;
+	infoStr += yelp.display_phone;
 	infoStr += '</p>';
 	return infoStr;
 }
 
-function addResultStats(res) {
+function addYelpStats(yelp) {
 	var statStr = '';
 	statStr += '<div class="y-stars">';
-	statStr += setStarsImg(res.rating);
+	statStr += setStarsImg(yelp.rating);
 	statStr += '</div>';
 	statStr += '<p class="y-rev">Based on ';
-	statStr += res.review_count;
+	statStr += yelp.review_count;
 	statStr += ' Reviews</p>';
-	statStr += '</div>';
 	statStr += '<a class="y-logo" href="';
-	statStr += res.url;
+	statStr += yelp.url;
 	statStr += '" target="_blank">';
 	statStr += '<img src="Resources/YelpLogo_Trademark/Screen(R)/Yelp_trademark_RGB.png" alt="yelp logo"  />';
 	statStr += '</a>';
+	statStr += '</div>';
 	return statStr;
 }
 
-function displayYelpList(res) {
-	yelpSection.empty();
-	var yelpEntry = '<h2>Yelp Results</h2><hl><ul>';
-	yelpEntry += addYelpEntries(res.businesses, 3);
-	yelpEntry += '</ul>';
-
-	yelpSection.append(yelpEntry);
+function setStarsImg(rating) {
+	return '<img class="yelp-result-stars" alt="' + rating + ' stars" src="' + yelpStar[rating] + '">';
 }
 
 function handleNews() {
@@ -214,40 +211,60 @@ function searchNews(newsSettings) {
 	});
 }
 
-function displayNewsList(res) {
+function displayNewsList(news) {
 	newsSection.empty();
-	var newsEntry = '<h2>News Results</h2><ul>';
-	newsEntry += addNewsEntries(res.articles, 3);
-	newsEntry += '</ul>';
-
+	var newsEntry = '<h2>' + stateNameField + ' News</h2>';
+	newsEntry += addNewsEntries(news.articles, 2);
 	newsSection.append(newsEntry);
 }
 
-function addNewsEntries(res, amount) {
+function addNewsEntries(news, amount) {
 	var newEntries = '';
 
 	for (let i = 0; i < amount; i++) {
-		newEntries += '<li class="result">';
-		newEntries += addNewsImg(res[i]);
-		newEntries += addNewsInfo(res[i]);
-		newEntries += '</li>';
+		newEntries += '<div class="news-card">';
+		newEntries += addNewsImg(news[i]);
+		newEntries += addNewsInfo(news[i]);
+		newEntries += '</div>';
 	}
 
 	return newEntries;
 }
 
-function addNewsInfo(res) {
+function addNewsImg(news) {
+	var imgStr = '<div class="n-img"><img src="';
+	imgStr += news.urlToImage;
+	imgStr += '" alt="';
+	imgStr += news.title;
+	imgStr += ' image"></div>';
+	return imgStr;
+}
+
+function addNewsInfo(news) {
 	var infoStr = '';
-	infoStr += '<div class="result-info">';
-	infoStr += '<h2 class="result-name">';
-	infoStr += res.title;
+	infoStr += '<h2 class="n-name">';
+	infoStr += news.title;
 	infoStr += '</h2>';
-	infoStr += '<h5 class="result-source">';
-	infoStr += res.source.name + ' | ' + res.publishedAt;
-	infoStr += '</h5><p><a href="';
-	infoStr += res.url;
-	infoStr += '">Read More</a></p></div>';
+	infoStr += '<h5 class="n-source">';
+	infoStr += news.source.name + ' | ' + shortenNewsDate(news);
+	infoStr += '</h5><p class="n-desc">';
+	infoStr += shortenNewsDesc(news);
+	infoStr += '<a href="';
+	infoStr += news.url;
+	infoStr += '">...Read More</a></p>';
 	return infoStr;
+}
+
+function shortenNewsDate(news) {
+	var newsDate = news.publishedAt;
+	newsDate = newsDate.slice(0, newsDate.indexOf('T'));
+	return newsDate;
+}
+
+function shortenNewsDesc(news) {
+	var newsDesc = news.description;
+	newsDesc = newsDesc.slice(0, newsDesc.indexOf('.'));
+	return newsDesc;
 }
 
 function handleWeather() {

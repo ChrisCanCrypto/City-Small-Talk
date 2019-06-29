@@ -6,47 +6,49 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<!-- CSS normalizer -->
 		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.css" />
+		<link href="https://fonts.googleapis.com/css?family=Noto+Sans|Rubik+Mono+One&display=swap" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 		<title>City Small Talk</title>
 	</head>
 	<body>
 		<header>
 			<!-- Search settings -->
-			<section id="search-field">
-				<div class="search-box row">
-					<form>
-						<div class="inner-form banner">
-							<fieldset>
-								<legend>Get local weather, news, and restraunt recomendations in your city!</legend>
-							</fieldset>
-							<div class="search-input">
-								<div class="input-field first-wrap">
-									<input type="text" placeholder="Zip Code" id="zip-input" required size="5" maxlength="5" />
-								</div>
-								<div class="input-field second-wrap">
-									<button type="submit" role="search" id="search-btn">SEARCH SMALL TALK</button>
-								</div>
-							</div>
+			<form id="search-form">
+				<legend>Get local weather, news, and restraunt recomendations in your city!</legend>
+				<fieldset>
+					<div class="search-input">
+						<div class="input-field first-wrap">
+							<input type="text" placeholder="Zip Code" id="zip-input" required size="5" maxlength="5" />
 						</div>
-					</form>
-				</div>
-			</section>
+						<div class="input-field second-wrap">
+							<button type="submit" role="search" id="search-btn">SEARCH SMALL TALK</button>
+						</div>
+					</div>
+				</fieldset>
+			</form>
 		</header>
 		<main>
-			<!-- Weather Section -->
-			<section id="results">
-				<div class="banner">
-					<section id="weather-section"></section>
-				</div>
+			<div id="result-section">
+				<!-- Weather Section -->
+				<section id="weather-section"></section>
 
-				<div class="api-sections row">
-					<!-- Yelp section -->
+				<!-- News Section -->
+				<section id="news-section"></section>
+				<!-- Yelp section -->
+				<div class="yelp-container">
+					<div class="yelp-handler">
+						<form id="yelp-form">
+							<img src="Resources/YelpLogo_Trademark/Screen(R)/Yelp_trademark_RGB.png" alt="yelp-logo" />
+							<legend>Search for other businesses:</legend>
+							<fieldset>
+								<input type="text" placeholder="Restraunt" id="yelp-term" />
+								<button type="submit" role="search" id="search-btn">SEARCH YELP</button>
+							</fieldset>
+						</form>
+					</div>
 					<section id="yelp-section"></section>
-
-					<!-- News Section -->
-					<section id="news-section"></section>
 				</div>
-			</section>
+			</div>
 		</main>
 
 		<footer>
