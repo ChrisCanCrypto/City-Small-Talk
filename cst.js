@@ -111,7 +111,7 @@ function searchYelp(yelpSettings) {
 
 function displayYelpList(yelp) {
 	var yelpEntry = '';
-	yelpEntry += addYelpEntries(yelp.businesses, 2);
+	yelpEntry += addYelpEntries(yelp.businesses, 20);
 	yelpSection.empty();
 	yelpSection.append(yelpEntry);
 }
