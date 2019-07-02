@@ -113,6 +113,7 @@ function displayYelpList(yelp) {
 	var yelpEntry = '';
 	yelpEntry += addYelpEntries(yelp.businesses, 20);
 	yelpSection.empty();
+	$('.yelp-handler').removeClass('hidden');
 	yelpSection.append(yelpEntry);
 }
 
@@ -214,7 +215,7 @@ function searchNews(newsSettings) {
 function displayNewsList(news) {
 	newsSection.empty();
 	var newsEntry = '<h2>' + stateNameField + ' News</h2>';
-	newsEntry += addNewsEntries(news.articles, 2);
+	newsEntry += addNewsEntries(news.articles, 5);
 	newsSection.append(newsEntry);
 }
 
@@ -309,6 +310,9 @@ function displayWeather() {
 	weatherStr += '<h2>';
 	weatherStr += weatherObj.cityName;
 	weatherStr += '</h2>';
+	weatherStr += '<h2 class="desc">';
+	weatherStr += weatherObj.disc;
+	weatherStr += '</h2>';
 	weatherStr += '<h2>';
 	weatherStr += weatherObj.currentTemp;
 	weatherStr += '&#8457</h2>';
@@ -316,9 +320,6 @@ function displayWeather() {
 	weatherStr += '<h4 class="high">High: ' + weatherObj.highTemp + '&#8457</h4>';
 	weatherStr += '<h4 class="low">Low: ' + weatherObj.lowTemp + '&#8457</h4>';
 	weatherStr += '</div>';
-	weatherStr += '<h2 class="desc">';
-	weatherStr += weatherObj.disc;
-	weatherStr += '</h2>';
 
 	weatherSection.append(weatherStr);
 }

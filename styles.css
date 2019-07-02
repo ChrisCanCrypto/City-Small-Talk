@@ -9,6 +9,25 @@
 	display: none;
 }
 
+body {
+	background-image: linear-gradient(
+		to bottom,
+		#f443e5,
+		#a789ff,
+		#1cb2ff,
+		#00cdff,
+		#00dfff,
+		#1ce9f8,
+		#41f3ee,
+		#63fbe3,
+		#8efecf,
+		#b3ffbd,
+		#d6ffb1,
+		#f7ffac
+	);
+	background-repeat: no-repeat;
+}
+
 section {
 	margin-top: 10px;
 }
@@ -31,7 +50,8 @@ fieldset {
 }
 
 #search-form legend {
-	font-size: 72px;
+	margin-top: 5px;
+	font-size: 2em;
 	line-height: 1;
 	color: #fff;
 	padding-bottom: 15px;
@@ -39,7 +59,6 @@ fieldset {
 
 #search-form {
 	background: rgba(0, 0, 0, 0.5);
-	padding: 10px;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -53,9 +72,9 @@ fieldset {
 	padding: 8px 0;
 	color: beige;
 	-webkit-font-smoothing: antialiased;
-	font-size: 45px;
+	font-size: 2em;
 	background: rgba(255, 255, 255, 0.25);
-	width: 540px;
+	width: 100%;
 	text-align: center;
 }
 
@@ -63,19 +82,33 @@ fieldset {
 	border: 3px solid ghostwhite;
 	padding: 8px 13px;
 	color: ghostwhite;
-	font-size: 45px;
+	font-size: 2em;
 	font-weight: 400;
 	letter-spacing: 2px;
 	background: rgba(255, 255, 255, 0.25);
 	transition: color 0.25s linear;
 	text-shadow: 0 0 3px #555555;
-	position: relative;
-	left: -3px;
 	border-radius: 0;
+	margin-bottom: 10px;
 }
 
-#search-form .inner-form button:hover {
-	color: orangered;
+/* Weather Section */
+#weather-section {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	text-align: center;
+	grid-gap: 3px;
+}
+
+#weather-section h2 {
+	font-size: 22px;
+	text-transform: uppercase;
+}
+
+#weather-section h4 {
+	font-size: 18px;
+	margin-top: 1px;
+	text-transform: uppercase;
 }
 
 /* Yelp */
@@ -91,39 +124,46 @@ fieldset {
 
 #yelp-section {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(1, 1fr);
 }
 
 .yelp-card {
 	display: grid;
-	grid-template-columns: repeat(10, 1fr);
+	grid-template-columns: repeat(9, 1fr);
 	grid-auto-rows: minmax(35px, auto);
 	grid-gap: 3px;
 	max-width: 550px;
-	margin: 0 auto;
+	height: 175px;
+	margin: 5px auto;
 	border: 1px solid black;
 	border-radius: 5%;
-	margin: 10px;
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
 	grid-template-areas:
 		'y-img y-img y-img y-img y-img y-name y-name y-name y-name y-name'
-		'y-img y-img y-img y-img y-img y-cat y-cat y-cat y-cat y-cat'
-		'y-img y-img y-img y-img y-img y-num y-num y-num y-num y-num'
-		'y-img y-img y-img y-img y-img y-loc y-loc y-loc . .'
-		'y-img y-img y-img y-img y-img y-loc y-loc y-loc . .'
-		'y-img y-img y-img y-img y-img y-stars y-stars y-stars y-logo y-logo'
-		'y-img y-img y-img y-img y-img y-rev y-rev y-rev y-logo y-logo';
+		'y-img y-img y-img y-img y-img  y-logo y-logo . . . '
+		'y-img y-img y-img y-img y-img y-stars y-stars y-stars y-stars y-stars'
+		'y-img y-img y-img y-img y-img y-rev y-rev y-rev y-rev y-rev';
 }
 
 .y-img {
 	grid-area: y-img;
 }
 
-.y-img img,
 .y-logo img {
-	width: 100%;
-	height: 100%;
+	width: 95%;
+	height: 85%;
 	border-radius: 4%;
+}
+
+.y-img img {
+	width: 175px;
+	height: 175px;
+	border: 1px solid black;
+	border-radius: 4%;
+}
+
+.yelp-card h2 {
+	font-size: 16px;
 }
 
 .y-name {
@@ -132,14 +172,17 @@ fieldset {
 
 .y-cat {
 	grid-area: y-cat;
+	display: none;
 }
 
 .y-loc {
 	grid-area: y-loc;
+	display: none;
 }
 
 .y-num {
 	grid-area: y-num;
+	display: none;
 }
 
 .y-stars {
@@ -154,14 +197,26 @@ fieldset {
 	grid-area: y-logo;
 }
 
+.y-center {
+	text-align: center;
+	margin: auto 0;
+}
+
 /* News Section */
 #news-section {
-	display: flex;
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	padding: 5px;
 }
 
 #news-section h2 {
 	align-self: center;
 	text-align: center;
+	font-size: 16px;
+}
+
+#news-section p {
+	font-size: 12px;
 }
 
 .news-card {
@@ -170,16 +225,15 @@ fieldset {
 	grid-auto-rows: 40px;
 	grid-gap: 5px;
 	max-width: 550px;
-	margin: 0 auto;
+	height: 175px;
 	border: 1px solid black;
 	border-radius: 5%;
-	margin: 10px;
+	margin: 5px auto;
 	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
 	grid-template-areas:
 		'n-img n-img n-img n-img n-name n-name n-name n-name n-name'
 		'n-img n-img n-img n-img n-name n-name n-name n-name n-name'
 		'n-img n-img n-img n-img n-source n-source n-source n-source n-source'
-		'n-img n-img n-img n-img n-desc n-desc n-desc n-desc n-desc'
 		'n-img n-img n-img n-img n-desc n-desc n-desc n-desc n-desc'
 		'n-img n-img n-img n-img n-desc n-desc n-desc n-desc n-desc'
 		'n-img n-img n-img n-img n-desc n-desc n-desc n-desc n-desc';
@@ -191,8 +245,9 @@ fieldset {
 
 .n-img img {
 	width: 100%;
-	height: 100%;
-	border-radius: 5%;
+	height: 175px;
+	border: 1px solid black;
+	border-radius: 4%;
 }
 
 #news-section .n-name {
@@ -206,26 +261,7 @@ fieldset {
 
 .n-desc {
 	grid-area: n-desc;
-}
-
-/* Weather Section */
-#weather-section {
-	display: flex;
-	width: 100%;
-	height: 8vh;
-	justify-content: space-evenly;
-	align-items: center;
-	margin-top: 0;
-}
-
-#weather-section h2 {
-	font-size: 32px;
-	text-transform: uppercase;
-}
-
-#weather-section h4 {
-	font-size: 22px;
-	margin-top: 1px;
+	display: none;
 }
 
 footer {
@@ -233,11 +269,144 @@ footer {
 	text-align: center;
 }
 
-@media screen and (min-width: 1050px) {
-	/* .api-sections {
-		margin-top: 10px;
+@media screen and (min-width: 500px) {
+	.news-card,
+	.yelp-card,
+	.news-card img,
+	.y-img img {
+		width: 100%;
+		height: 275px;
+	}
+
+	.yelp-card {
+		grid-template-areas:
+			'y-img y-img y-img y-img y-img y-name y-name y-name y-name y-name'
+			'y-img y-img y-img y-img y-img y-cat y-cat y-cat y-cat y-cat'
+			'y-img y-img y-img y-img y-img y-num y-num y-num y-num y-num'
+			'y-img y-img y-img y-img y-img y-stars y-stars y-stars y-logo y-logo'
+			'y-img y-img y-img y-img y-img y-rev y-rev y-rev y-logo y-logo';
+	}
+
+	.n-desc,
+	.y-num,
+	.y-cat {
+		display: block;
+	}
+}
+
+@media screen and (min-width: 600px) {
+	#search-form legend {
+		margin-top: 20px;
+		font-size: 4em;
+	}
+	#search-form input,
+	#search-form button {
+		font-size: 3em;
+		width: 540px;
+	}
+}
+
+@media screen and (min-width: 805px) {
+	#weather-section {
 		display: flex;
-		align-items: baseline;
+		width: 100%;
+		height: 8vh;
 		justify-content: space-evenly;
-	} */
+		align-items: center;
+		margin-top: 0;
+	}
+	#weather-section h2 {
+		font-size: 30px;
+	}
+
+	#weather-section h4 {
+		font-size: 22px;
+	}
+
+	#news-section h2,
+	#yelp-section h2 {
+		font-size: 18px;
+	}
+
+	#news-section p,
+	#yelp-section p {
+		font-size: 14px;
+	}
+	#news-section,
+	#yelp-section {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.y-loc {
+		display: block;
+	}
+
+	.yelp-card {
+		max-width: 400px;
+		grid-template-areas:
+			'y-img y-img y-img y-img y-img y-name y-name y-name y-name y-name'
+			'y-img y-img y-img y-img y-img y-cat y-cat y-cat y-cat y-cat'
+			'y-img y-img y-img y-img y-img y-num y-num y-num y-num y-num'
+			'y-img y-img y-img y-img y-img y-loc y-loc y-loc . .'
+			'y-img y-img y-img y-img y-img y-loc y-loc y-loc . .'
+			'y-img y-img y-img y-img y-img y-stars y-stars y-stars y-logo y-logo'
+			'y-img y-img y-img y-img y-img y-rev y-rev y-rev y-logo y-logo';
+	}
+
+	.news-card {
+		max-width: 400px;
+		grid-template-areas:
+			'n-img n-img n-img n-img n-name n-name n-name n-name n-name'
+			'n-img n-img n-img n-img n-name n-name n-name n-name n-name'
+			'n-img n-img n-img n-img n-name n-name n-name n-name n-name'
+			'n-img n-img n-img n-img n-source n-source n-source n-source n-source'
+			'n-img n-img n-img n-img n-source n-source n-source n-source n-source';
+	}
+
+	.n-desc {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 902px) {
+	#news-section h2,
+	#yelp-section h2 {
+		font-size: 20px;
+	}
+
+	#news-section p,
+	#yelp-section p {
+		font-size: 14px;
+	}
+
+	.yelp-card {
+		max-width: 450px;
+	}
+	.news-card {
+		margin: 5px auto;
+		max-height: 375px;
+		max-width: 450px;
+		grid-template-areas:
+			'n-img n-img n-img n-img n-name n-name n-name n-name n-name'
+			'n-img n-img n-img n-img n-name n-name n-name n-name n-name'
+			'n-img n-img n-img n-img n-source n-source n-source n-source n-source'
+			'n-img n-img n-img n-img n-desc n-desc n-desc n-desc n-desc'
+			'n-img n-img n-img n-img n-desc n-desc n-desc n-desc n-desc'
+			'n-img n-img n-img n-img n-desc n-desc n-desc n-desc n-desc';
+	}
+
+	.n-img img {
+		max-height: 375px;
+	}
+
+	.n-desc {
+		display: block;
+	}
+}
+
+@media screen and (min-width: 1400px) {
+	#news-section,
+	#yelp-section {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }
