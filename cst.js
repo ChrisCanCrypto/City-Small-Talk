@@ -17,6 +17,8 @@ var weatherObj = {
 	sunset: undefined
 };
 
+var isSearchReady = false;
+
 var yelpStar = {
 	'0': 'Resources/yelp_stars/web_and_ios/regular/regular_0.png',
 	'1': 'Resources/yelp_stars/web_and_ios/regular/regular_1.png',
@@ -34,79 +36,28 @@ var weatherResponse = undefined;
 var yelpResponse = undefined;
 var newsResponse = undefined;
 
-function handleSearch() {
-	handleZipInput();
-
-	$('#search-form').on('submit', function(event) {
-		event.preventDefault();
-		updateCitySearch(searchField);
-		handleYelp();
-		handleNews();
-		handleWeather();
-	});
-
-	$('#yelp-form').on('submit', function(event) {
-		event.preventDefault();
-		if (yelpTerm != undefined && yelpTerm != null) {
-			yelpTerm = $('#yelp-term').val();
-			handleYelp();
-		}
-	});
-}
-
-function handleZipInput() {
-	// Search using Zip Code
-	$('#zip-input').keyup(function(event) {
-		zipField = $(this).val();
-
-		if (zipField.length == 5) {
-			$.getJSON('Resources/csvjson.json', function(data) {
-				$.each(data, function(key, value) {
-					if (zipField == value.zip) {
-						searchField = value;
-					}
-				});
-			});
-		}
-	});
-}
-
-function updateCitySearch(searchField) {
-	cityField = searchField.city;
-	stateNameField = searchField.state_name;
-	stateCodeField = searchField.state_code;
-	zipField = searchField.zip;
-}
-
 function handleYelp() {
-	let token =
+	const token =
 		'Bearer kGyQVf1mVDbLkBJA3ybB37c2we4jmAPdkQfW-42BBsHskQQtW-zxsZIXpSY66UUVmAG7sG9_moAVW33smeq8OQbbU3JnvNu9bQviMTAZB4DMychkVCt0dW0WxX4JXXYx';
-	var yelpURL = 'https://api.yelp.com/v3/businesses/search?';
-	var corsAnywhereURL = 'https://cors-anywhere.herokuapp.com';
-	var yelpSettings = {
-		async: true,
-		crossDomain: true,
-		url: corsAnywhereURL + '/' + yelpURL,
-		method: 'GET',
-		data: {
-			term: yelpTerm,
-			location: zipField
-		},
+
+	fetch(makeYelpURL(), {
 		headers: {
 			'Authorization': token
 		}
-	};
-
-	searchYelp(yelpSettings);
+	})
+		.then(res => res.json())
+		.then(yelpJson => displayYelpList(yelpJson))
+		.catch(e => console.log(e));
 	// displayYelpList(yelpResponse);
 }
 
-function searchYelp(yelpSettings) {
-	$.ajax(yelpSettings).done(function(response) {
-		yelpResponse = response;
-		console.log(yelpResponse);
-		displayYelpList(yelpResponse);
-	});
+function makeYelpURL() {
+	var corsAnywhereURL = 'https://cors-anywhere.herokuapp.com';
+	var yelpURL = 'https://api.yelp.com/v3/businesses/search?';
+	var searchTerm = 'term=' + yelpTerm;
+	var searchLocation = 'location=' + zipField;
+
+	return corsAnywhereURL + '/' + yelpURL + searchTerm + '&' + searchLocation;
 }
 
 function displayYelpList(yelp) {
@@ -118,6 +69,7 @@ function displayYelpList(yelp) {
 }
 
 function addYelpEntries(yelp, amount) {
+	console.log(yelp);
 	var newEntries = '';
 
 	for (let i = 0; i < amount; i++) {
@@ -183,6 +135,13 @@ function addYelpStats(yelp) {
 
 function setStarsImg(rating) {
 	return '<img class="yelp-result-stars" alt="' + rating + ' stars" src="' + yelpStar[rating] + '">';
+}
+
+function displayYelpError(e) {
+	yelpSection.empty();
+	var yelpErrorEntry = 'Sorry yelp is running into an issue with your request.' + e;
+	$('.yelp-handler').addClass('hidden');
+	yelpSection.append(yelpErrorEntry);
 }
 
 function handleNews() {
@@ -330,8 +289,56 @@ function kelvinToFahrenheit(temp) {
 	return fahTemp;
 }
 
-function handleCST() {
-	handleSearch();
+function handleSearch() {
+	handleZipInput();
+
+	$('#search-form').on('submit', function(event) {
+		event.preventDefault();
+		if (isSearchReady === true) {
+			handleYelp();
+			// handleNews();
+			// handleWeather();
+		} else {
+			alert(
+				'Something is wrong, Either you have forgotten to enter a zip code, or the zip code you entered is not currently in our database. Try entering another zip code and search again.'
+			);
+		}
+	});
+
+	$('#yelp-form').on('submit', function(event) {
+		event.preventDefault();
+		if (yelpTerm != undefined && yelpTerm != null) {
+			yelpTerm = $('#yelp-term').val();
+			handleYelp();
+		}
+	});
 }
 
-$(handleCST);
+function handleZipInput() {
+	// Search using Zip Code
+	$('#zip-input').keyup(function(event) {
+		zipField = $(this).val();
+
+		if (zipField.length == 5) {
+			$.getJSON('Resources/csvjson.json', function(data) {
+				$.each(data, function(key, value) {
+					if (zipField == value.zip) {
+						searchField = value;
+						updateCitySearch(searchField);
+					}
+				});
+			});
+		}
+	});
+}
+
+function updateCitySearch(searchField) {
+	cityField = searchField.city;
+	stateNameField = searchField.state_name;
+	stateCodeField = searchField.state_code;
+	zipField = searchField.zip;
+
+	isSearchReady = true;
+}
+
+$(handleSearch);
