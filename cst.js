@@ -36,11 +36,12 @@ var weatherResponse = undefined;
 var yelpResponse = undefined;
 var newsResponse = undefined;
 
-function handleYelp() {
+function handleYelp(zip, term) {
+	term = term || 'restaurants';
 	const token =
 		'Bearer kGyQVf1mVDbLkBJA3ybB37c2we4jmAPdkQfW-42BBsHskQQtW-zxsZIXpSY66UUVmAG7sG9_moAVW33smeq8OQbbU3JnvNu9bQviMTAZB4DMychkVCt0dW0WxX4JXXYx';
 
-	fetch(makeYelpURL(), {
+	fetch(makeYelpURL(zip, term), {
 		headers: {
 			'Authorization': token
 		}
@@ -51,11 +52,11 @@ function handleYelp() {
 	// displayYelpList(yelpResponse);
 }
 
-function makeYelpURL() {
+function makeYelpURL(zip, term) {
 	var corsAnywhereURL = 'https://cors-anywhere.herokuapp.com';
 	var yelpURL = 'https://api.yelp.com/v3/businesses/search?';
-	var searchTerm = 'term=' + yelpTerm;
-	var searchLocation = 'location=' + zipField;
+	var searchLocation = 'location=' + zip;
+	var searchTerm = 'term=' + term;
 
 	return corsAnywhereURL + '/' + yelpURL + searchTerm + '&' + searchLocation;
 }
@@ -295,9 +296,11 @@ function handleSearch() {
 	$('#search-form').on('submit', function(event) {
 		event.preventDefault();
 		if (isSearchReady === true) {
-			handleYelp();
+			handleYelp(searchField.zip);
 			// handleNews();
 			// handleWeather();
+			$('#zip-input').val('');
+			isSearchReady = false;
 		} else {
 			alert(
 				'Something is wrong, Either you have forgotten to enter a zip code, or the zip code you entered is not currently in our database. Try entering another zip code and search again.'
