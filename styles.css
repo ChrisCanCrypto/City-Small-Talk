@@ -26,6 +26,14 @@ body {
 		#f7ffac
 	);
 	background-repeat: no-repeat;
+	min-height: 100vh;
+	max-width: 1500px;
+	margin: auto auto;
+}
+
+a:hover,
+button:hover {
+	cursor: pointer;
 }
 
 section {
