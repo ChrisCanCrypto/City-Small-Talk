@@ -49,7 +49,6 @@ function handleYelp(zip, term) {
 		.then(res => res.json())
 		.then(yelpJson => displayYelpList(yelpJson))
 		.catch(e => console.log(e));
-	// displayYelpList(yelpResponse);
 }
 
 function makeYelpURL(zip, term) {
@@ -155,7 +154,6 @@ function handleNews() {
 		method: 'GET',
 		data: {
 			q: '"' + stateNameField + '"'
-			// apiKey: 'ba31778142b040128190f031a0b8a129'
 		},
 		headers: {
 			'Authorization': token
