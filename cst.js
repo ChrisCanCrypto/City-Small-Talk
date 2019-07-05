@@ -295,8 +295,8 @@ function handleSearch() {
 		event.preventDefault();
 		if (isSearchReady === true) {
 			handleYelp(searchField.zip);
-			// handleNews();
-			// handleWeather();
+			handleNews();
+			handleWeather();
 			$('#zip-input').val('');
 			isSearchReady = false;
 		} else {
