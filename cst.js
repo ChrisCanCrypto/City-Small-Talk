@@ -309,8 +309,7 @@ function handleSearch() {
 	$('#yelp-form').on('submit', function(event) {
 		event.preventDefault();
 		if (yelpTerm != undefined && yelpTerm != null) {
-			yelpTerm = $('#yelp-term').val();
-			handleYelp();
+			handleYelp(zipField, $('#yelp-term').val() );
 		}
 	});
 }
