@@ -128,14 +128,17 @@ function addYelpStats(yelp) {
 	statStr += '<a class="y-logo" href="';
 	statStr += yelp.url;
 	statStr += '" target="_blank">';
-	statStr += '<img src="Resources/YelpLogo_Trademark/Screen(R)/Yelp_trademark_RGB.png" alt="yelp logo"  />';
+	statStr +=
+		'<img src="Resources/YelpLogo_Trademark/Screen(R)/Yelp_trademark_RGB.png" alt="yelp logo"  />';
 	statStr += '</a>';
 	statStr += '</div>';
 	return statStr;
 }
 
 function setStarsImg(rating) {
-	return '<img class="yelp-result-stars" alt="' + rating + ' stars" src="' + yelpStar[rating] + '">';
+	return (
+		'<img class="yelp-result-stars" alt="' + rating + ' stars" src="' + yelpStar[rating] + '">'
+	);
 }
 
 function displayYelpError(e) {

@@ -5,8 +5,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<!-- CSS normalizer -->
-		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.css" />
-		<link href="https://fonts.googleapis.com/css?family=Noto+Sans|Rubik+Mono+One&display=swap" rel="stylesheet" />
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="//cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.css"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css?family=Noto+Sans|Rubik+Mono+One&display=swap"
+			rel="stylesheet"
+		/>
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 		<title>City Small Talk</title>
 	</head>
@@ -14,14 +21,25 @@
 		<header>
 			<!-- Search settings -->
 			<form id="search-form">
-				<legend>Get local weather, news, and restraunt recomendations in your city!</legend>
+				<legend>
+					Get local weather, news, and restaurant recommendations in your city!
+				</legend>
 				<fieldset>
 					<div class="search-input">
 						<div class="input-field first-wrap">
-							<input type="text" placeholder="Zip Code" id="zip-input" required size="5" maxlength="5" />
+							<input
+								type="text"
+								placeholder="Zip Code"
+								id="zip-input"
+								required
+								size="5"
+								maxlength="5"
+							/>
 						</div>
 						<div class="input-field second-wrap">
-							<button type="submit" role="search" id="search-btn">SEARCH SMALL TALK</button>
+							<button type="submit" role="search" id="search-btn">
+								SEARCH SMALL TALK
+							</button>
 						</div>
 					</div>
 				</fieldset>
@@ -38,12 +56,17 @@
 				<div class="yelp-container">
 					<div class="yelp-handler hidden">
 						<form id="yelp-form">
-							<img src="Resources/YelpLogo_Trademark/Screen(R)/Yelp_trademark_RGB.png" alt="yelp-logo" />
+							<img
+								src="Resources/YelpLogo_Trademark/Screen(R)/Yelp_trademark_RGB.png"
+								alt="yelp-logo"
+							/>
 							<div class="y-center">
 								<legend>Search for other businesses:</legend>
 								<fieldset>
-									<input type="text" placeholder="Restraunt" id="yelp-term" />
-									<button type="submit" role="search" id="search-btn">SEARCH YELP</button>
+									<input type="text" placeholder="restaurant" id="yelp-term" />
+									<button type="submit" role="search" id="search-btn">
+										SEARCH YELP
+									</button>
 								</fieldset>
 							</div>
 						</form>
@@ -56,7 +79,9 @@
 		<footer>
 			<p>
 				Zip Code Information provided by
-				<a href="https://simplemaps.com/data/us-zips">https://simplemaps.com/data/us-zips</a>
+				<a href="https://simplemaps.com/data/us-zips"
+					>https://simplemaps.com/data/us-zips</a
+				>
 			</p>
 		</footer>
 	</body>
