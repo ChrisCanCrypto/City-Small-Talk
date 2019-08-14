@@ -49,7 +49,6 @@ function handleYelp(zip, term) {
 		.then(res => res.json())
 		.then(yelpJson => displayYelpList(yelpJson))
 		.catch(e => console.log(e));
-	// displayYelpList(yelpResponse);
 }
 
 function makeYelpURL(zip, term) {
@@ -158,7 +157,6 @@ function handleNews() {
 		method: 'GET',
 		data: {
 			q: '"' + stateNameField + '"'
-			// apiKey: 'ba31778142b040128190f031a0b8a129'
 		},
 		headers: {
 			'Authorization': token
@@ -300,8 +298,8 @@ function handleSearch() {
 		event.preventDefault();
 		if (isSearchReady === true) {
 			handleYelp(searchField.zip);
-			// handleNews();
-			// handleWeather();
+			handleNews();
+			handleWeather();
 			$('#zip-input').val('');
 			isSearchReady = false;
 		} else {
@@ -314,8 +312,7 @@ function handleSearch() {
 	$('#yelp-form').on('submit', function(event) {
 		event.preventDefault();
 		if (yelpTerm != undefined && yelpTerm != null) {
-			yelpTerm = $('#yelp-term').val();
-			handleYelp();
+			handleYelp(zipField, $('#yelp-term').val() );
 		}
 	});
 }

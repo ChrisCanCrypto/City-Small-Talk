@@ -57,7 +57,8 @@ fieldset {
 	border: 0;
 }
 
-#search-form legend {
+#search-form legend, 
+#search-form p {
 	margin-top: 5px;
 	font-size: 2em;
 	line-height: 1;
@@ -97,7 +98,7 @@ fieldset {
 	transition: color 0.25s linear;
 	text-shadow: 0 0 3px #555555;
 	border-radius: 0;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 /* Weather Section */
